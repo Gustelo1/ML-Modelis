@@ -44,9 +44,8 @@ y = y.astype('float64')
 #Treniravimo duomenys splitinami, kad mokymas būtų teisingas
 train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=0)
 
-#Sukuriamas modelis su XGBRegressor. n_estimators ir learning_rate parinkti spėliojimo būdu. Didinant n_estimators skaičių mae mažėja, tačiau mažėjimas
-#beveik nepastebimas, tad norint sutaupyti mokymui reikalingą laiką parinktas 500 skaičius.
-my_model = XGBRegressor(n_estimators=500)
+#Sukuriamas modelis su XGBRegressor. n_estimators parinktas labai didelis, tačiau early_stopping_rounds sustabdo n_estimators skaičių kai jis yra geriausias.
+my_model = XGBRegressor(n_estimators=100000, learning_rate = 0.02, subsample = 0.85)
 
 #Modelis fitinamas su mokymo duomenimis.
 #Duodami validation duomenys, kad galima būtų sekti geriausius rezultatus. Taip nustatomas geriausias n_estimators skaičius.
